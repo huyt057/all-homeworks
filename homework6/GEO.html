@@ -1,0 +1,434 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="http://cdn.bootcss.com/jquery/1.10.1/jquery.min.js"></script>
+	<script>
+        $(function () {
+          // 选项卡
+          var len = $('.imglist li').length;
+          var bannerWidth = $('#banner').width();
+          var num = 0;
+          var timer = null;
+
+
+          var oFirst = $('.imglist li').eq(len - 1).prop('outerHTML');
+          var oLast = $('.imglist li').eq(0).prop('outerHTML');
+          $('.imglist').append($(oLast));
+          $('.imglist').prepend($(oFirst));
+
+          $('.imglist').width($('.imglist li').length * bannerWidth + 'px');
+          $('.imglist').css('left', -bannerWidth + 'px');
+
+          function slide (direction) {
+            var direction = direction || 1 ;
+            if (direction === 1) {
+              if (num >= len - 1) {
+                $('.imglist').stop(true, true).animate({left: '-=' + bannerWidth}, 400, function () {
+                  $('.imglist').css('left', -bannerWidth + 'px');
+                });
+                num = 0;
+              } else {
+                $('.imglist').stop(true, true).animate({left: '-=' + bannerWidth}, 400);
+                num++;
+              }
+            } else {
+              if (num <= 0) {
+                $('.imglist').stop(true, true).animate({left: '+=' + bannerWidth}, 400, function () {
+                  $('.imglist').css('left', -len * bannerWidth + 'px');
+                });
+                num = len - 1;
+              } else {
+                $('.imglist').stop(true, true).animate({left: '+=' + bannerWidth}, 400);
+                num--;
+              }
+            }
+            // tabText();
+            // tabSmallimgList();
+          }
+
+          // 自动轮播
+          timer = setInterval(function () {
+            slide();
+          }, 2000)
+
+          // 悬停切换
+          $('#banner').hover(function () {
+            clearInterval(timer);
+          }, function () {
+            timer = setInterval(function () {
+              slide();
+            }, 2000)
+          })
+         
+          // 切换文字
+          function tabText () {
+            $('.banner_text p').removeClass('active');
+            $('.banner_text p').eq(num).addClass('active');
+          }
+         
+          // 左右按钮切换
+          $('#banner .prev').click(function () {
+            slide();
+          });
+          $('#banner .next').click(function () {
+            slide(2);
+          })
+
+        
+
+          //导航下拉
+          $('.mainnav').hover(function () {
+            $(this).find('.subnav').stop(true, true).slideDown();
+          }, function () {
+            $(this).find('.subnav').stop(true, true).slideUp();
+
+           })
+           }) 
+    </script>
+	<script type="text/javascript">
+		window.onload=function(){ 
+		var oBox = document.getElementById('box');
+		var aBtn = oBox.getElementsByTagName('a'); 
+		var aContent = oBox.getElementsByTagName('ul');
+			for(var i = 0; i < aBtn.length;i++)
+			{
+				aBtn[i].index=i;
+				aBtn[i].onclick=function(){
+					
+					
+					for(var k=0;
+					k<aContent.length;k++){
+						aContent[k].className="";
+						aBtn[k].className="";
+					}
+					aBtn[this.index].className="active";
+					aContent[this.index].className="now";
+					
+				}
+
+			}
+	}
+	</script>
+</head>
+<body>
+	<div id="top">
+		<a href="#"><img src="img/nenugeologo.jpg"></a>
+		<div class="map">
+		<ul>
+		<a href="#">学校主页</a> | <a href="#">邮箱登陆</a> | <a href="#">English</a>
+		</ul>
+		<input type="textarea" name="" placeholder="">
+		<input type="submit" name="" value="搜 索">
+		</div>
+		
+	</div>
+	<div id="nav">
+			<ul class="nav">
+				<li class="mainnav">
+				<a href="#">首页</a>
+				<div class="subnav">
+					<img src="img/smallpicture.jpg">
+					<ul class=submenu"">	
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 师资队伍</a></li>
+						<li><a href="#">> 教育教学</a></li>
+						<li><a href="#">> 科学研究</a></li>
+						<li><a href="#">> 学科建设</a></li>
+						<li><a href="#">> 合作交流</a></li>
+						<li><a href="#">> 党建工作</a></li>
+						<li><a href="#">> 学生工作</a></li>
+						<li><a href="#">> 校友园地</a></li>	
+					</ul>
+				</div>
+				</li>
+				<li class="mainnav">
+				<a href="#">学院概况</a>
+				<div class="subnav">
+					<img src="img/smallpicture.jpg">
+					<ul class=submenu"">	
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 师资队伍</a></li>
+						<li><a href="#">> 教育教学</a></li>
+						<li><a href="#">> 科学研究</a></li>
+						<li><a href="#">> 学科建设</a></li>
+						
+					</ul>
+				</div>
+				</li>
+				<li class="mainnav">
+				<a href="#">师资队伍</a>
+				<div class="subnav">
+					<img src="img/smallpicture.jpg">
+					<ul class=submenu"">	
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 学院概况</a></li>
+						<li><a href="#">> 师资队伍</a></li>
+						<li><a href="#">> 教育教学</a></li>
+						<li><a href="#">> 科学研究</a></li>
+						<li><a href="#">> 学科建设</a></li>
+						<li><a href="#">> 合作交流</a></li>
+						<li><a href="#">> 党建工作</a></li>
+						<li><a href="#">> 学生工作</a></li>
+						<li><a href="#">> 校友园地</a></li>	
+					</ul>
+				</div>
+				</li>
+				
+				<li class="mainnav"><a href="#">教育教学</a></li>
+				<li class="mainnav"><a href="#">科学研究</a></li>
+				<li class="mainnav"><a href="#">学科建设</a></li>
+				<li class="mainnav"><a href="#">合作交流</a></li>
+				<li class="mainnav"><a href="#">党建工作</a></li>
+				<li class="mainnav"><a href="#">学生工作</a></li>
+				<li class="mainnav"><a href="#">校友园地</a></li>
+
+			</ul>
+		</div>
+	<div class="banner_bg">		
+		<div id="banner">
+			<ul class="imglist">
+				<li><a href="#"><img src="img/picture.jpg"></a></li>
+				<li><a href="#"><img src="img/1.jpg"></a></li>
+				<li><a href="#"><img src="img/2.jpg"></a></li>
+				<li><a href="#"><img src="img/3.jpg"></a></li>
+			</ul>
+
+			<span class="btn prev">←</span>
+      		<span class="btn next">→</span>
+
+		     <div class="banner_bottom">
+		        <div class="banner_text">
+		          <p class="active">东北师范大学 · 地理科学学院 欢迎您<br>
+				  <span>Welcome to School of Geographical Sciences</span></p>
+		          <p>标题2</p>
+		          <p>标题3</p>
+		          <p>标题4</p>
+		        </div>
+
+		      </div>
+		    </div>
+		     <img src="img/whitepeak.png" alt="后来加的bg" style="width:100%;z-index:2;position:relative;bottom:50px;" class="whitepeak">   
+
+		</div>
+	</div>
+	<div id="content1">
+		<div class="left">
+			<h2><img src="img/logo1.jpg">学院新闻 <span>NEWS</span></h2>
+			<div class="more">
+				<img src="img/more.jpg">
+			</div>
+			<div class="clear"></div>
+			<div class="con">
+				<img src="img/sb2.jpg">
+				<p>
+				<strong>我院学生在第五届吉林省高等学校大学生测绘技能竞赛中获佳绩</strong><br>
+					<span>2016-07-05</span><br>
+					<a href="#">7月2日至7月3日，由我院韩阳老师指导的 2013级地理信息科学专
+					业本科生陈星……</a>
+				</p>
+				<ul>	
+					<li><span>2016.07.12</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">我院学生在第五届吉林省高等学校大学生测绘技能竞赛中获佳绩</a></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><span>2016.07.12</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">我院学生赛中获佳绩</a></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><span>2016.07.12</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">我院学生在第五届吉林省高等学校大学生测绘技</a></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><span>2016.07.12</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">我院学生在第五届吉林省高等学校大学生</a></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+				</ul>
+			</div>
+		</div>
+		<div class="right">
+			<h2><img src="img/logo1.jpg">通知公告<span>  NOTITICES</span></h2>
+		
+			<div id="box">
+				<a href="#" class="active">全部</a>
+				<a href="#">学院公告</a>
+				<a href="#">教师通知</a>
+				<a href="#">研究生通知</a>
+				<a href="#">本科通知</a>
+				<div class="clear"></div>
+				<ul class="now">
+					<li><img src="img/notice.jpg">东北师范大学地理科学学院申请博士学历证书办法<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">我院学生在第五届吉林省高等学校大学生测绘技能竞赛中获佳绩<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">东北师范大学地理科学学院申请博士学历证书办法<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">东北师范大学地理科学历证书办法 <span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">东北师范大学地理科学学院申请博士学历证书办法<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">东北师范大学地理科学学院书办法<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+					<li><img src="img/notice.jpg">东北师范大学地理科学学院书办法<span>2016.02.12</span></li>
+					<li class="dot">-------------------------------------------------------------------------------------------------------------------------------</li>
+				</ul>
+				<ul >
+					<li>2</li>
+					<li>2</li>
+					<li>2</li>
+				</ul>
+				<ul >
+					<li>3</li>
+					<li>3</li>
+					<li>3</li>
+				</ul>
+				<ul >
+					<li>4</li>
+					<li>4</li>
+					<li>4</li>
+				</ul>
+				<ul >
+					<li>5</li>
+					<li>5</li>
+					<li>5</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="content2">
+		<div class="side">
+			<h2><img src="img/logo1.jpg">学术活动<span>EVENTS</span></h2>
+
+			<div class="more">
+				<img src="img/more.jpg">
+			</div>
+			<div class="clear"></div>
+			<ul>
+				<li>
+				<img src="img/time.jpg">
+					<p>
+						<a href="#">学术报告：针对MODIS数据的地表温度反演算法研究</a><br>
+						<span>时间：09:30</span><br>
+						<span>地点：地理科学学院 三楼会议室</span>
+					</p>
+				</li>
+				<li style="margin-top:13px">
+				<img src="img/time.jpg">
+					<p>
+						<a href="#">学术报告：针对MODIS数据的地表温度反演算法研究</a><br>
+						<span>时间：09:30</span><br>
+						<span>地点：地理科学学院 三楼会议室</span>
+					</p>
+				</li>
+				<li style="margin-top:13px">
+				<img src="img/time.jpg">
+					<p>
+						<a href="#">学术报告：针对MODIS数据的地表温度反演算法研究</a><br>
+						<span>时间：09:30</span><br>
+						<span>地点：地理科学学院 三楼会议室</span>
+					</p>
+				</li>
+				<li style="margin-top:1px">
+				<img src="img/time.jpg">
+					<p>
+						<a href="#">学术报告：针对MODIS数据的地表温度反演算法研究</a><br>
+						<span>时间：09:30</span><br>
+						<span>地点：地理科学学院 三楼会议室</span>
+					</p>
+				</li>
+			</ul>
+		</div>	
+		<div class="content">
+			<div class="left">
+				<h2><img src="img/logo1.jpg">科研动态<span>RESEARCH PROGRESS</span></h2>
+				<div class="more">
+					<img src="img/more.jpg">
+				</div>
+				<div class="clear"></div>
+				<ul>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					<li><a href="#">我院XXX教授在XXXXX期刊发表论文</a><span>2012.12.12</span></li>
+					<li class="dot">--------------------------------------------------------------------------------------------------------------------------</li>
+					
+				</ul>
+			</div>
+			<div class="right">
+				<ul>
+					<li class="active">快速通道</a></li>
+					<li><a href="#">办公指南</a></li>
+					<li><a href="#">校历查看</a></li>
+					<li><a href="#">课表查询</a></li>
+					<li><a href="#">精品课程</a></li>
+					<li><a href="#">下载中心</a></li>
+					<li><a href="#">场所预定</a></li>
+					<li><a href="#">科技成果查询</a></li>
+					<li><a href="#">社科成果查询</a></li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="bottom">
+				<p>常用链接</p>
+				<ul class="li">
+					<a href="#">教务处</a>
+					<li>|</li>
+					<a href="#">研究生院</a>
+					<li>|</li>
+					<a href="#">人事处</a>					
+					<li>|</li>
+					<a href="#">财务处</a>
+					<li>|</li>
+					<a href="#">科技处</a>
+					<li>|</li>
+					<a href="#">社科处</a>
+					<li>|</li>
+					<a href="#">国家科学基金委</a>
+					<li>|</li>
+					<a href="#">中国地理学会</a>
+				</ul>
+				<ul class="imglist_">
+					<li><img src="img/img1.jpg"></li>
+					<li><img src="img/img2.jpg"></li>
+					<li><img src="img/img3.jpg"></li>
+					<li  style="margin-right:0;"><img src="img/img3.jpg" ></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer">
+		<img src="img/peak.jpg" class="peak">
+		<div class="text">
+			<div class="left">
+				<img src="img/ghouse.png" class="house">
+				<img src="img/circle.png" class="circle">
+				<div class="clear"></div>
+				<p>通讯地址：吉林省长春市人民大街3208号</p>
+				<p>邮编：130024</p>
+				<p>电话：0431-85099550</p>
+				<p>E-mail：dili@nenu.edu.cn</p>
+				<p>版权所有：东北师范大学地理科学学院</p>
+			</div>
+			
+
+			<div class="right">
+				<div>
+				<img src="img/ma.jpg">
+				<p>学院微信公众号</p>
+				</div>
+				<div>
+				<img src="img/ma.jpg">
+				<p>学院团委微信公众号</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+</html>
